@@ -12,5 +12,6 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [sitemap(), mdx()]
+  integrations: [sitemap(), mdx()],
+  site: "https://portfolio-umber-six-el1i78kx88.vercel.app"
 });
