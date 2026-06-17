@@ -30,12 +30,14 @@
 
 - [ ] Define tokens: near-black/zinc neutral base + **one** accent (electric blue or violet). Max 3 colors total.
 - [ ] Type: Inter/Geist (sans) + one mono (JetBrains/Geist Mono) for tags/code. 2 fonts max. Preload fonts.
-- [ ] Dark mode default + light toggle; respect `prefers-reduced-motion`.
+- [ ] Dark mode only — single consistent theme, no toggle; respect `prefers-reduced-motion`.
 - [ ] Spacing scale on 4/8px grid; max content width ~1100px.
 - [ ] Base components: `BaseLayout.astro`, `Nav.astro` (sticky), `Footer.astro`.
-- [ ] Nav + footer both carry: Work · Journey · Skills · Contact · GitHub · LinkedIn · Email · [Resume ↓]. (Rule 8)
+- [ ] **Nav** — no name/logo. **All items pinned to the right** as one cluster: **Home · Work · Journey · Skills · Contact · [Resume ↓]**. ("Home" jumps to the hero where name/photo/awards live; replaces the clickable-name pattern.) No social links in the nav (avoid congestion).
+- [ ] **Footer — minimal** (sticky nav + Contact-as-last-section make a full footer redundant). Just: colophon (© {year} + name), optional small social icons (GitHub · LinkedIn · Email) + "↑ Back to top". **Not** a full duplicate of the Contact section. (Rule 8 satisfied via the always-visible sticky "Contact" nav link + the Contact section.)
+- [ ] Section links are in-page anchor jumps (`#work`/`#journey`/`#skills`/`#contact`), single scroll — not separate routes.
 
-**Exit criteria:** Sticky nav + footer render on a themed empty page; theme toggle works; links jump to (yet-empty) section anchors.
+**Exit criteria:** Sticky nav + footer render on a themed empty page; links jump to (yet-empty) section anchors.
 
 ---
 

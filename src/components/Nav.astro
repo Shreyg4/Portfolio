@@ -1,0 +1,12 @@
+---
+import { sectionLinks } from '../consts'
+---
+
+<nav aria-label="Primary" class="sticky top-0 z-50 bg-surface">
+    <div class="wrapper flex items-center justify-end gap-6 py-4">
+        {sectionLinks.map((link) => (
+            <a href={link.href} class="hover:text-accent transition-colors">{link.label}</a>
+        ))}
+        <a href="/resume.pdf" download class="text-accent hover:opacity-80 transition-opacity">Resume ↓</a>
+    </div>
+</nav>

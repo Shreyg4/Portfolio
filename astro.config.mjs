@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -13,5 +13,19 @@ export default defineConfig({
   },
 
   integrations: [sitemap(), mdx()],
-  site: "https://portfolio-umber-six-el1i78kx88.vercel.app"
+  site: "https://portfolio-umber-six-el1i78kx88.vercel.app",
+  fonts: [
+    {  
+      provider: fontProviders.google(),
+      name: "Geist",
+      cssVariable: "--font-geist",
+      weights: [400, 500, 600, 700],
+    },
+    {
+      provider: fontProviders.google(),
+      name: "JetBrains Mono",
+      cssVariable: "--font-jetbrains",
+      weights: [400],
+    }
+  ]
 });

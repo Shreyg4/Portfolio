@@ -69,8 +69,10 @@ Single scrolling page with sticky nav (best for recruiter skim), plus optional d
 /work/7th-samurai
 ```
 
-**Nav (sticky):** Logo/name · Work · Journey · Skills · **Contact · GitHub · LinkedIn · Email** · [Resume ↓]
-- Contact + social links live in **both the header and the footer** (Rule 8). Optional fixed/floating social icons.
+**Nav (sticky):** no name/logo — **all items pinned to the right** as one cluster: **Home · Work · Journey · Skills · Contact · [Resume ↓]**. "Home" jumps to the hero (name/photo/awards), replacing the clickable-name wordmark.
+- **Keep the bar uncluttered:** only the section links + Resume live in the nav. Social/contact details (GitHub, LinkedIn, Email, optional phone) do **not** sit in the nav — they live in the **Contact section** and the **footer**.
+- Section links are **in-page anchor jumps** on the single scrolling page (`#work`, `#journey`, `#skills`, `#contact`) — not separate pages. (The only separate routes are the optional `/work/[slug]` case studies, reached from project cards.)
+- **Rule 8 (easy to contact) still satisfied:** "Contact" is a one-click nav jump (always visible via the sticky nav) to the full contact section. Footer is minimal (colophon + optional icons), not a full link repeat. Optional fixed/floating social icons remain on the table.
 - Every nav link jumps straight to its content — no multi-step navigation (Rule 7).
 
 ---
@@ -105,9 +107,9 @@ Single scrolling page with sticky nav (best for recruiter skim), plus optional d
 ### More Projects
 - Compact list: SpaceExplorer, MoviesEDA, choose-your-own-adventure, Calculator, etc. Name + one-liner + GitHub link. No deep treatment.
 
-### Contact (Rule 8 — easy to reach, links in header AND footer)
-- Email (mailto, lightly obfuscated), GitHub, LinkedIn, Resume PDF.
-- Repeat these in the **footer** and the **header**; optional fixed/floating social icons that stay accessible while scrolling.
+### Contact (Rule 8 — easy to reach)
+- This is where the contact details actually live (moved out of the nav to keep the bar clean): Email (mailto, lightly obfuscated), LinkedIn, GitHub, Resume PDF, and **optional phone** (weigh spam risk — email/LinkedIn alone is the safer default).
+- The **footer is minimal** — colophon (© {year} + name), optional small social icons + "↑ Back to top" — **not** a full repeat of this section (sticky nav + Contact-as-last-section make duplication redundant). The **nav** only links *to* this section via the "Contact" item. Optional fixed/floating social icons that stay accessible while scrolling.
 - One friendly line: "The fastest way to reach me is email — I reply quickly."
 
 ---
@@ -208,7 +210,8 @@ Single scrolling page with sticky nav (best for recruiter skim), plus optional d
 ## 7. Design system
 
 - **Aesthetic:** Clean, modern, professional (Linear/Vercel reference). Typography-driven, generous whitespace.
-- **Theme:** Dark mode default, optional light toggle.
+- **Visual reference:** https://www.aaabadcode.com/ — dark/high-contrast, sans + **mono "terminal" accents** (use JetBrains Mono for the quick-facts line / tech tags / a small hero code block), minimalist, **no borders (separation via whitespace)**, grid-based. ⚠️ **Do NOT copy two things from it:** (1) skill **percentage bars** — violates Rule 6 (use grouped lists + counts); (2) heavy **scroll motion** — violates Rule 4 (restrained motion only, honor `prefers-reduced-motion`).
+- **Theme:** Dark mode only — single consistent theme, no light/dark toggle.
 - **Color:** Neutral base (near-black/zinc) + a single restrained accent (e.g., electric blue or violet). One accent only.
 - **Type:** Sans for UI/body (Inter or Geist); optional mono for code/tags (JetBrains Mono / Geist Mono). Strong type scale, clear hierarchy.
 - **Layout:** Max content width ~1100px, comfortable line length, consistent spacing scale (4/8px grid).
@@ -292,7 +295,7 @@ Single scrolling page with sticky nav (best for recruiter skim), plus optional d
 - Vercel vs GitHub Pages (lean Vercel).
 - Custom domain choice + purchase (deferred).
 - Contact form (optional, post-v1).
-- Light/dark toggle vs dark-only (lean dark default + toggle).
+- ~~Light/dark toggle vs dark-only~~ — **resolved: dark-only, no toggle** (single consistent theme).
 - ~~Konami/press-start easter egg~~ — **cut** (Rule 4).
 
 ---
