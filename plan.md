@@ -98,17 +98,17 @@
 ## Phase 4 — Projects: the spine (Work + Journey + Skills in one)
 **Goal:** One section that carries the work, the skills, and the growth story. Self-contained cards readable inline; depth optional. (Rules 2 & 7; portfolioPlan §3/§4)
 
-- [ ] **Section lead-in (does the Journey's job in 1–2 lines):** counts line ("6 shipped projects · 2 award-winning games · solo and team work · ~4 yrs coding") + one framing line — *newest first, but the through-line runs the other way: current AI/full-stack work grew from an award-winning game-dev foundation.*
-- [ ] `ProjectCard.astro`: thumbnail/GIF, name, one-liner, problem→result (1 line each), **the skills/tech it demonstrates (`stack[]` tags = Skills, per-project)**, Live · Code (+ optional Read more →), and an **award badge** when `award` is set.
-- [ ] Render the featured grid **newest → oldest** from the collection sort (ConvoySync → EvacLogix → MMO RPG → AI Pipeline; games appended at the foundation/bottom in Phase 6). Order is data-driven — re-sort via `date`/`order`, never markup.
-- [ ] **Skills = per-card** (no `SkillGroup` component, no standalone section). Optional: a single condensed "tech at a glance" strip in the lead-in if per-card tags miss breadth — decide after seeing it live. **No skill bars** (Rule 6).
-- [ ] **Journey = the ordering** (no `Timeline` component). EvacLogix flagged on its card as the games→AI callback; reference AI fundamentals (search/adversarial/RL) where relevant — **no CS188 links** (§14).
-- [ ] **More / Notable showcase** at the **end of the section** — render `notable:true` entries as compact cards (name + one-liner + skills + GitHub/Live). Owner curates which appear.
-- [ ] `CaseStudyLayout.astro` + `/work/[slug]` dynamic route for optional deep pages.
-- [ ] Wrap the section (and its subsections) in the `Section` fade-in wrapper from Phase 1.
-- [ ] Consistent thumbnail aspect ratio (placeholders until media in Phase 7).
+- [x] **Section lead-in:** counts line ("6 featured projects · 2 award-winning games · solo & team work · ~4 years coding") + framing line (*newest first, but the through-line runs the other way: AI/full-stack work grew from an award-winning game-dev foundation*).
+- [x] `ProjectCard.astro`: name, role·timeframe, one-liner, **per-project `stack[]` tags (= Skills)**, conditional Live · Code · Demo links, "View More →" to the detail page, and an **award badge** when `award` is set. (Thumbnail slot deferred to Phase 7 media.)
+- [x] Render the featured grid **newest → oldest** from `getFeaturedProjects()`: ConvoySync → EvacLogix → MMO RPG → AI Pipeline → 7th Samurai → Amalgamate. Data-driven (re-sort via `date`/`order`).
+- [x] **Skills = per-card** via `stack[]` tags (no `SkillGroup`, no standalone section). **No skill bars** (Rule 6). *(Condensed "tech at a glance" strip still optional — revisit after media.)*
+- [x] **Journey = the ordering** (no `Timeline`). **EvacLogix flagged on its card** as the games→AI callback (via optional `note` field). No CS188 links (§14).
+- [x] **More / Notable showcase** at the end — `getNotableProjects()` rendered as compact cards (name + one-liner + skills + conditional Live/Code). Owner curates via `notable:true` (currently MoviesEDA, Choose-Your-Own-Adventure, Calculator, SpaceExplorer — stubs).
+- [x] `/work/[slug]` dynamic route renders the full Markdown body (Problem/Approach/Result) + meta/stack/links/award + back link. (Layout inline in `[slug].astro` via `BaseLayout` — `CaseStudyLayout` not extracted; fine for current depth.)
+- [x] Section + subsections wrapped in the `Section` fade-in wrapper.
+- [ ] Consistent thumbnail aspect ratio — **deferred to Phase 7** (real media); cards currently text-only.
 
-**Exit criteria:** Projects renders as the 2nd section; cards read newest→oldest with skills on each; the growth story is legible from the order + lead-in (no separate Journey/Skills section); notable showcase closes the section; deep pages route correctly.
+**Exit criteria (met):** Projects renders as the spine; cards read newest→oldest with skills on each; the growth story is legible from order + lead-in (no separate Journey/Skills section); notable showcase closes the section; 9 `/work/*` deep pages route correctly. Build green.
 
 ---
 

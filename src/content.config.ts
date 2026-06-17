@@ -24,6 +24,7 @@ const projects = defineCollection({
         notable: z.boolean().default(false), // closing "more projects" showcase
         order: z.number().optional(), // optional tie-breaker within the same date
         thumbnail: z.string().optional(),
+        note: z.string().optional(), // small callout on the card (e.g. EvacLogix games→AI callback)
         award: z
             .object({ place: z.string(), event: z.string() })
             .optional(), // renders the badge on game cards (Phase 6)

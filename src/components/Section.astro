@@ -33,7 +33,9 @@ const { id, class: className } = Astro.props;
                     }
                 }
             },
-            { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+            // threshold 0 (not 0.15): sections taller than the viewport can never
+            // reach 15% visibility, which would leave them stuck at opacity:0.
+            { threshold: 0, rootMargin: "0px 0px -10% 0px" }
         );
 
         sections.forEach((el) => observer.observe(el));

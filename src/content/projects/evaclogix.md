@@ -7,7 +7,7 @@ date: 2026-06-15
 status: "complete · deployed"
 stack: [Unity, C#, ShaderLab, HLSL, TypeScript, Netlify]
 featured: true
-# The games → AI/simulation callback (portfolioPlan §4).
+note: "The games → AI / simulation callback."
 # TODO (owner): add verified Netlify live URL + repo URL before launch.
 links: {}
 ---

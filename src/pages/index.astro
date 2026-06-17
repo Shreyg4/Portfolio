@@ -3,6 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import Section from '../components/Section.astro'
 import Hero from '../components/Hero.astro'
 import About from '../components/About.astro'
+import ProjectCard from '../components/ProjectCard.astro'
+import { getFeaturedProjects, getNotableProjects } from '../lib/projects'
+
+const featured = await getFeaturedProjects();
+const notable = await getNotableProjects();
 ---
 
 <BaseLayout>
@@ -15,8 +20,46 @@ import About from '../components/About.astro'
 			<About />
 		</Section>
 
-		<Section id="projects" class="min-h-screen py-16">
-			<h2>Projects</h2>
+		<Section id="projects" class="py-24">
+			<h2 class="text-2xl font-bold sm:text-3xl">
+				<span class="font-mono text-accent">/ </span>Projects
+			</h2>
+			<p class="mt-4 font-mono text-xs text-text/60">
+				6 featured projects · 2 award-winning games · solo &amp; team work · ~4 years coding
+			</p>
+			<p class="mt-3 max-w-2xl text-sm text-text/70">
+				Newest first — but the through-line runs the other way: my current AI &amp; full-stack
+				work grew out of an award-winning game-dev foundation.
+			</p>
+
+			<div class="mt-10 grid gap-6 sm:grid-cols-2">
+				{featured.map((project) => <ProjectCard project={project} />)}
+			</div>
+
+			<h3 class="mt-16 text-lg font-bold text-text/80">
+				<span class="font-mono text-accent">/ </span>More Projects
+			</h3>
+			<ul class="mt-6 grid gap-4 sm:grid-cols-2">
+				{notable.map((project) => (
+					<li class="rounded-lg bg-text/3 p-5 transition hover:bg-text/6">
+						<h4 class="font-bold">{project.data.title}</h4>
+						<p class="mt-1 text-sm text-text/70">{project.data.oneLiner}</p>
+						{project.data.stack.length > 0 && (
+							<p class="mt-2 font-mono text-xs text-text/50">{project.data.stack.join(" · ")}</p>
+						)}
+						{(project.data.links.live || project.data.links.repo) && (
+							<div class="mt-3 flex gap-4 text-xs text-text/60">
+								{project.data.links.live && (
+									<a href={project.data.links.live} target="_blank" rel="noopener noreferrer" class="hover:text-accent">Live ↗</a>
+								)}
+								{project.data.links.repo && (
+									<a href={project.data.links.repo} target="_blank" rel="noopener noreferrer" class="hover:text-accent">Code ↗</a>
+								)}
+							</div>
+						)}
+					</li>
+				))}
+			</ul>
 		</Section>
 
 		<Section id="contact" class="min-h-screen py-16">
