@@ -1,0 +1,41 @@
+---
+// Reusable section wrapper. Staggers a subtle fade/translate-in on its direct
+// children as the section enters the viewport (the v4.brittanychiang.com beat).
+// Reveal styles live in global.css ([data-reveal]); this just toggles `.is-visible`.
+// Honors prefers-reduced-motion (handled in global.css). Every section renders
+// through this — current and future (Projects, Contact, a later Experience, ...).
+interface Props {
+    id?: string;
+    class?: string;
+}
+
+const { id, class: className } = Astro.props;
+---
+
+<section id={id} data-reveal class:list={["scroll-mt-24", className]}>
+    <slot />
+</section>
+
+<script>
+    const sections = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+        // No motion (or no observer support): just show everything.
+        sections.forEach((el) => el.classList.add("is-visible"));
+    } else {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target);
+                    }
+                }
+            },
+            { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+        );
+
+        sections.forEach((el) => observer.observe(el));
+    }
+</script>

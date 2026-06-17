@@ -16,6 +16,12 @@
     padding-inline: 1.5rem;
 }
 
+/* Outline → fill accent button. One source of truth — reuse for Resume, hero CTAs, Contact.
+   Dark (surface) text on hover reads far better than white on the light-cyan accent. */
+@utility btn-accent {
+    @apply rounded border border-accent px-3 py-1.5 text-accent transition-colors hover:bg-accent hover:text-surface;
+}
+
 html {
     font-family: var(--font-sans);
     scroll-behavior: smooth;
@@ -33,5 +39,31 @@ html {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+}
+
+/* Staggered section reveal — Section.astro toggles `.is-visible` via IntersectionObserver.
+   Direct children fade/translate in with incremental delays (the v4.brittanychiang.com beat). */
+[data-reveal] > * {
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+[data-reveal].is-visible > * {
+    opacity: 1;
+    transform: none;
+}
+
+[data-reveal].is-visible > *:nth-child(2) { transition-delay: 0.08s; }
+[data-reveal].is-visible > *:nth-child(3) { transition-delay: 0.16s; }
+[data-reveal].is-visible > *:nth-child(4) { transition-delay: 0.24s; }
+[data-reveal].is-visible > *:nth-child(n + 5) { transition-delay: 0.32s; }
+
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal] > * {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 }

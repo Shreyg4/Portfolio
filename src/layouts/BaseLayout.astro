@@ -1,7 +1,8 @@
 ---
 import "../styles/global.css"
 import Nav from "../components/Nav.astro"
-import Footer from "../components/Footer.astro"; 
+import Footer from "../components/Footer.astro";
+import SocialRail from "../components/SocialRail.astro"
 import { Font } from 'astro:assets'
 
 interface Props {
@@ -23,9 +24,11 @@ const {title = "Shreyas Sundar Ganesh", description = "AI + Full Stack Engineer"
         <Font cssVariable="--font-jetbrains" preload/>
         <title>{title}</title>
         <meta name="description" content={description}/>
+        <noscript><style>[data-reveal] > * { opacity: 1 !important; transform: none !important; }</style></noscript>
     </head>
     <body class="bg-surface text-text">
         <Nav />
+        <SocialRail />
         <slot />
         <Footer />
     </body>

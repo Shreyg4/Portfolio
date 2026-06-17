@@ -1,14 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import Section from '../components/Section.astro'
 import { sectionLinks } from '../consts'
 ---
 
 <BaseLayout>
 	<main class="wrapper">
+		<Section id="home" class="min-h-screen py-16">
+			<h2>Home</h2>
+		</Section>
 		{sectionLinks.map((link) => (
-			<section id={link.href.replace("#", "")} class="scroll-mt-24 min-h-screen py-16">
+			<Section id={link.href.replace("#", "")} class="min-h-screen py-16">
 				<h2>{link.label}</h2>
-			</section>
+			</Section>
 		))}
 	</main>
 </BaseLayout>

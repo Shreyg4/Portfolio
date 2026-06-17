@@ -3,22 +3,7 @@ import { socialLinks } from "../consts";
 const year = new Date().getFullYear();
 ---
 
-<footer class="wrapper flex flex-wrap items-center justify-between gap-4 py-8 text-sm">
+<footer class="wrapper flex flex-wrap items-center justify-center gap-4 py-8 text-sm text-center">
     <span>© {year} Shreyas Sundar Ganesh</span>
-    <div class="flex gap-4">
-        {socialLinks.map((link) => {
-            const isExternal = link.href.startsWith("http");
-            return (
-                <a
-                    href={link.href}
-                    target={isExternal ? "_blank" : undefined}
-                    rel={isExternal ? "noopener noreferrer" : undefined}
-                    class="hover:text-accent transition-colors"
-                >
-                    {link.label}
-                </a>
-            );
-        })}
-    </div>
     <a href="#home" class="hover:text-accent transition-colors">↑ Back to top</a>
 </footer>
