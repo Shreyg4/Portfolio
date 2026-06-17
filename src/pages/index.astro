@@ -1,18 +1,32 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
 import Section from '../components/Section.astro'
-import { sectionLinks } from '../consts'
+import Hero from '../components/Hero.astro'
+import About from '../components/About.astro'
 ---
 
 <BaseLayout>
 	<main class="wrapper">
-		<Section id="home" class="min-h-screen py-16">
-			<h2>Home</h2>
+		<Section id="home" class="flex min-h-screen items-start pt-[20vh] pb-16">
+			<Hero />
 		</Section>
-		{sectionLinks.map((link) => (
-			<Section id={link.href.replace("#", "")} class="min-h-screen py-16">
-				<h2>{link.label}</h2>
-			</Section>
-		))}
+
+		<Section id="about" class="min-h-screen py-16">
+			<About />
+		</Section>
+
+		<Section id="projects" class="min-h-screen py-16">
+			<h2>Projects</h2>
+		</Section>
+
+		<Section id="contact" class="min-h-screen py-16">
+			<h2 class="text-2xl font-bold sm:text-3xl">
+				<span class="font-mono text-accent">/ </span>Contact
+			</h2>
+			<p class="mt-6 inline-flex items-center gap-2 font-mono text-sm text-accent">
+				<span class="h-2 w-2 rounded-full bg-accent"></span>
+				Available now — open to SWE &amp; research internships
+			</p>
+		</Section>
 	</main>
 </BaseLayout>

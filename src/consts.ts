@@ -2,6 +2,7 @@
 // "Home" is not a nav item — the logo links to the #home hero (rendered
 // separately in index.astro). Journey + Skills are folded into Projects.
 export const sectionLinks = [
+    {label: "About", href: "#about"},
     {label: "Projects", href: "#projects"},
     {label: "Contact", href: "#contact"},
 ];

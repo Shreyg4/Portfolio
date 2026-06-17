@@ -16,14 +16,14 @@
 ## Phase 0 — Scaffold & deploy pipeline
 **Goal:** Prove the deploy pipeline end-to-end with a blank page before any real content.
 
-- [ ] `npm create astro@latest` — minimal/empty template, TypeScript strict.
-- [ ] Add Tailwind via `npx astro add tailwind`.
-- [ ] Add integrations: `@astrojs/sitemap`, `@astrojs/mdx`.
-- [ ] Init git repo; create public GitHub repo (`portfolio` or `shreyg4.github.io`).
-- [ ] Connect repo to Vercel → auto-deploy on push to `main` + PR previews.
-- [ ] Configure `site` in `astro.config.mjs`.
+- [x] `npm create astro@latest` — minimal/empty template, TypeScript strict (`tsconfig` extends `astro/tsconfigs/strict`).
+- [x] Add Tailwind (v4 via `@tailwindcss/vite`).
+- [x] Add integrations: `@astrojs/sitemap`, `@astrojs/mdx`.
+- [x] Init git repo; public GitHub repo (`Shreyg4/Portfolio`).
+- [x] Connect repo to Vercel → auto-deploy on push to `main` + PR previews. *(Site is configured at the `*.vercel.app` URL; the auto-deploy/PR-preview wiring is a Vercel-dashboard setting — confirm there, not visible from the repo.)*
+- [x] Configure `site` in `astro.config.mjs`.
 
-**Exit criteria:** A blank page is live on a `*.vercel.app` URL and redeploys automatically on push.
+**Exit criteria (met):** A blank page is live on a `*.vercel.app` URL; build is green and reproducible.
 
 ---
 
@@ -37,8 +37,8 @@
 - [x] Dark mode only — single consistent theme, no toggle; `prefers-reduced-motion` handled globally.
 - [x] Spacing scale on 4/8px grid; max content width ~1100px (`wrapper` utility).
 - [x] Base components: `BaseLayout.astro`, `Nav.astro` (sticky), `Footer.astro`.
-- [x] **Nav** — no name/logo. **All items pinned right** as one cluster: **Home · Projects · Contact · [Resume ↓]** (new IA — Journey/Skills folded into Projects). ("Home" jumps to the hero.) No social links in the nav. **Driven by `sectionLinks` in `consts.ts`** (edit data, not markup).
-- [x] **Footer — minimal:** colophon (© {year} + name) + small social icons + "↑ Back to top". Not a Contact duplicate. **Driven by `socialLinks` in `consts.ts`.**
+- [x] **Nav** — **logo placeholder (SSG → `#home`) far left**, links cluster far right: **Projects · Contact · [Resume ↓]** (new IA — Journey/Skills folded into Projects; the logo owns "Home"). Full-bleed, translucent + `backdrop-blur`. No social links in the nav. **Driven by `sectionLinks` in `consts.ts`** (edit data, not markup).
+- [x] **Footer — minimal:** centered colophon (© {year} + name) + "↑ Back to top". Not a Contact duplicate (socials live in the fixed rail, not the footer).
 - [x] Section links are in-page anchor jumps (`#home`/`#projects`/`#contact`), single scroll — not separate routes (placeholder section anchors render so jumps work).
 
 **Borrowed patterns from the new reference (done in code):**
@@ -46,41 +46,52 @@
 - [x] **`SocialRail.astro`:** fixed vertical social-icon rail, **bottom-left**, persistent while scrolling (GitHub · LinkedIn · Email, inline SVGs). Driven by `socialLinks`; hidden on mobile. **No** right-side email rail.
 - [x] **`Section.astro` fade-in wrapper:** staggers a subtle fade/translate-in on its children as it enters the viewport (IntersectionObserver → `.is-visible`; styles in `global.css`), collapses to instant under `prefers-reduced-motion`, with a `<noscript>` fallback. **Every section renders through this.**
 - [x] **Data-driven check:** nav + section anchors derive from `sectionLinks`; footer + rail derive from `socialLinks` (both in `consts.ts`). Add/delete = data edit only — sets up easy future sections (e.g. Experience — portfolioPlan §8).
-- [x] **Nav aligned to new IA:** Home · Projects · Contact · [Resume ↓] (Journey + Skills folded into Projects).
+- [x] **Nav aligned to new IA:** logo→Home, then Projects · Contact · [Resume ↓] (Journey + Skills folded into Projects).
 
 **Exit criteria (met):** Themed page with scroll-aware sticky nav + fixed social rail + minimal footer; anchor links jump to (yet-empty) sections; sections fade-reveal on scroll (and don't, under reduced-motion). Build green.
 
 ---
 
-## Phase 2 — Hero (folds in About)
+## Phase 2 — Hero + About Me
 **Goal:** Name + slogan recognizable in <1s. (Rules 2 & 5)
+**IA note:** evolved during build — About was **split into its own section** (not folded into the hero), and availability **moved to Contact**. The hero is deliberately minimal.
 
-- [ ] H1 name + slogan subhead + availability micro-line.
-- [ ] Folded-in 2–3 sentence bio + quick-facts line (UW Bothell · GPA 3.64 · 5× Dean's List · Grad June 2027 · AZ-900).
-- [ ] **No awards strip** — the two AMES awards move to the game project cards in the Projects section (§6.5–6.6 / Phase 6).
-- [ ] Availability badge: "Available now — open to SWE/research internships."
-- [ ] CTAs: View Projects (scroll) · Download Résumé (PDF) · Email (mailto).
-- [ ] Placeholder headshot + placeholder `resume.pdf` in `/public`.
-- [ ] Restrained motion only — no game gimmick. (Rule 4)
+**Done (in code):**
+- [x] **Hero** — single `H1` name + tagline ("I build end-to-end products.") + mono eyebrow ("Hi, My name is") + one-line current-endeavors snippet (bachelor's + capstone). Sits in the upper viewport (`pt-[20vh]`); fades in on load.
+- [x] **About Me** (own section): 2–3 sentence bio + quick-facts line (UW Bothell · GPA 3.64 · 5× Dean's List · Grad June 2027) + headshot + "View Projects" CTA.
+- [x] **No awards strip** — none anywhere; the two AMES awards are deferred to the game project cards (§6.5–6.6 / Phase 6).
+- [x] **Availability** surfaced as a static line in the **Contact** section (not a hero badge — restyled per design call).
+- [x] Placeholder headshot (`/public/headshot.svg`) + valid placeholder `resume.pdf` in `/public`.
+- [x] Restrained motion only — fade-in reveal + hover; no game gimmick (Rule 4). (Pulsing availability dot removed.)
+- [x] CTAs reachable site-wide: **Résumé** (nav button), **Email** (social rail), **View Projects** (About) — Résumé/Email are persistent UI rather than hero CTAs.
 
-**Exit criteria:** Hero communicates who/what/availability above the fold with working CTAs (placeholders OK).
+**Intentional deviations from the original spec (revert any if you want):**
+- Availability lives in **Contact**, not "above the fold" in the hero.
+- Quick-facts dropped **Azure AZ-900** (one-line re-add in About if wanted).
+- Hero tagline no longer leads with the **"AI + full-stack"** positioning line (§1) — it's only in the About bio now. Worth deciding if the hero should reassert it.
+- **Résumé + Email are not hero CTAs** — they live in the nav + social rail (+ Contact, Phase 5).
+
+**Exit criteria (met):** Hero communicates who (name) + what (tagline) in <1s; About carries bio/facts/headshot; placeholders in place; build green. *(Availability now in Contact rather than above the fold — accepted trade-off.)*
 
 ---
 
 ## Phase 3 — Content collection & project schema
 **Goal:** Data layer so adding/removing/reordering a project = editing a Markdown file. (portfolioPlan §8)
 
-- [ ] Define `projects` collection schema: `title, oneLiner, role, timeframe, date, status, stack[] (the skills/tech it demonstrates), links{live,repo,video}, featured:bool, notable:bool, order, thumbnail, award?`.
-  - `date` (or `order`) drives the **reverse-chronological** sort (newest first).
+- [x] Define `projects` collection schema (`src/content.config.ts`, glob loader): `title, oneLiner, role, timeframe, date, status, stack[], links{live,repo,video}, featured:bool, notable:bool, order?, thumbnail?, award?`.
+  - `date` drives the **reverse-chronological** sort (newest first); `order?` is the tie-breaker.
   - `stack[]` is how **Skills** surface — per project, no separate section.
-  - `award?` (optional) renders the badge + framing on the game cards.
+  - `award?` (optional `{place, event}`) renders the badge + framing on the game cards.
   - `notable:true` marks owner-curated showcase entries for the **end** of the section.
-- [ ] Author the **4 known featured** as Markdown (`featured:true`): ConvoySync, EvacLogix, AI E-Commerce Pipeline, MMO RPG Database (§6.1–6.4), each with its skills in `stack[]`.
-- [ ] Author the **notable/showcase pool** (`notable:true`): SpaceExplorer, MoviesEDA, choose-your-own-adventure, Calculator — **owner picks which to surface.**
-- [ ] Verify sort + filters: `featured` newest→oldest for the main grid; `notable` for the closing showcase.
-- [ ] Metrics policy: only real figures (team size, commit counts, "thousands of entries / 10+ categories"); else qualitative.
+- [x] Query helper `src/lib/projects.ts` — `getFeaturedProjects()` / `getNotableProjects()` (filter + reverse-chron sort).
+- [x] Author the **4 featured** as Markdown (`featured:true`), each with `stack[]` + Problem/Approach/Result body: ConvoySync, EvacLogix, MMO RPG Database, AI E-Commerce Pipeline (§6.1–6.4).
+- [x] Author the **notable pool** (`notable:true`): MoviesEDA, Choose-Your-Own-Adventure, Calculator, SpaceExplorer — **stubs with owner-TODOs** (minimal source detail; owner to confirm descriptions/stack/links + which surface).
+- [x] Verify sort + filters: build validates schema; featured sorts **ConvoySync → EvacLogix → MMO RPG → AI Pipeline**; notable pool resolves.
+- [x] Metrics policy honored: only real figures (3-person team, 38/135 commits, "thousands of entries / 10+ categories"); no invented numbers.
 
-**Exit criteria:** Collection type-checks; featured items sort newest→oldest; notable pool exists; all content lives as files (delete file = remove from site).
+**Open (owner):** `links{}` are empty in every file — I did **not** invent repo/live/video URLs. Add verified links before launch (esp. EvacLogix Netlify, ConvoySync demo recording, MMO `schemasquad` repo).
+
+**Exit criteria (met):** Collection type-checks (build green); featured sorts newest→oldest; notable pool exists; all content lives as files (delete file = remove from site).
 
 ---
 

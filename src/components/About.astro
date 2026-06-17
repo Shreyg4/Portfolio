@@ -1,0 +1,48 @@
+---
+// About Me — folded-out of the hero: headshot, availability, bio, quick-facts.
+// Awards are NOT here — they live on the game project cards (portfolioPlan §4).
+import { socialLinks } from "../consts";
+
+const mailto =
+    socialLinks.find((l) => l.label === "Email")?.href ??
+    "mailto:shreyassundar0305@gmail.com";
+
+const quickFacts = [
+    "UW Bothell",
+    "GPA 3.64",
+    "5× Dean's List",
+    "Grad June 2027",
+];
+---
+
+<div>
+    <h2 class="text-2xl font-bold sm:text-3xl">
+        <span class="font-mono text-accent">/ </span>About Me
+    </h2>
+
+    <div class="mt-8 flex flex-col-reverse items-center gap-10 md:flex-row md:items-start md:justify-between md:gap-12">
+        <div class="max-w-xl text-center md:text-left">
+            <p class="leading-relaxed text-text/70">
+                Third-year CS &amp; Software Engineering student at UW Bothell. I started in
+                award-winning game development — Unity, C#, custom shaders — and grew into
+                data engineering and AI, building LLM-powered pipelines and full-stack apps.
+                Today I build intelligent, end-to-end products and I&apos;m available now for
+                software engineering and research internships.
+            </p>
+
+            <p class="mt-5 font-mono text-xs text-text/55">{quickFacts.join("  ·  ")}</p>
+
+            <div class="mt-8 flex flex-wrap justify-center gap-4 md:justify-start">
+                <a href="#projects" class="btn-accent">View Projects</a>
+            </div>
+        </div>
+
+        <img
+            src="/headshot.svg"
+            alt="Shreyas Sundar Ganesh"
+            width="320"
+            height="320"
+            class="h-44 w-44 shrink-0 rounded-full object-cover ring-1 ring-accent/30 sm:h-56 sm:w-56 md:h-72 md:w-72"
+        />
+    </div>
+</div>
